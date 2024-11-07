@@ -13,6 +13,25 @@ body {font-family: "Lato", sans-serif;}
   padding: 35px;
 }
 
+.links {
+  padding: 8px 8px 10px 8px;
+  border-radius: 5px;
+  background-color: #a42335;
+  border: none;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.links:active {
+  opacity: 0.8;
+}
+
+.links:hover {
+  opacity: 0.9;
+}
+
 .sidebar img.logo {
   width: 100%; /* Make logo take full width of sidebar */
   height: auto; /* Maintain aspect ratio */

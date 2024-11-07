@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Add Employee</title>
+    <title>Reports</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,94 +11,63 @@
 <div class="sidebar">
     <img src="logo.png" alt="Logo" class="logo">
     <a href="dashboard.html">Home</a>
-    <a href="employee.html">Add Employees</a>
-    <a href="removeEmp.html">Remove Employee</a>
+    <a href="removeEmp.html">Manage Employees</a>
     <a href="payroll.html">Process Payroll</a>
     <a href="reports.html">View Reports</a>
-    <a href="index.html" id="logout">Logout</a>
+    <a href="index.html" id="logout"><b>Logout</b></a>
 </div>
 
-<main>
-    <div class="wrapper-main">
-       
-        <section>
-            <h2>Add New Employee</h2>
-            <form id="employee-form">
-                <input type="text" id="employee-name" placeholder="Employee Name" required />
-                <input type="email" id="employee-email" placeholder="Email" required />
-                <input type="text" id="employee-job" placeholder="Job Title" required />
-                <input type="number" id="employee-salary" placeholder="Salary" required />
-                <input type="text" id="employee-id-number" placeholder="ID Number" required />
-                <button type="submit">Add Employee</button>
-            </form>
-            <h2>Employee List</h2>
-            <table id="employee-list">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Job Title</th>
-                        <th>Salary</th>
-                        <th>ID Number</th>
-                    </tr>
-                </thead>
-                <tbody></tbody> <!-- Employee rows will be added here dynamically -->
-            </table>
-        </section>
+<div class="main">
+    <main>
+        <div class="wrapper-main">
+            <section id="reports-section">
+                <h2>Reports Overview</h2>
+                <p>Select a report type to view detailed information.</p>
 
-    </div>
-    
-</main>
+                <!-- Example report types -->
+                <div class="report-types">
+                   
+                    <a class="links" href="./salary.html">Salary Report</a>
+                   
+                </div>
+
+                <!-- Placeholder for displaying selected report -->
+                <div id="report-display" style="margin-top: 20px;">
+                    <!-- Dynamic content will be injected here -->
+                    <h3 id="report-title">Employee List</h3>
+                    <table id="report-table">
+                        <thead>
+                            <tr><th>Name</th><th>Email</th><th>Job Title</th><th>Salary</th><th>ID Number</th></tr>
+                        </thead>
+                        <tbody></tbody> <!-- Rows will be added dynamically -->
+                    </table>
+                </div>
+
+            </section>
+        </div>
+
+    </main>
+</div>
 
 <script>
-// Get references to the form and tbody
-const form = document.getElementById('employee-form');
-const employeeList = document.getElementById('employee-list').querySelector('tbody');
-
-// Load employees from localStorage
+// Load employees from localStorage and display them in the report table
 function loadEmployees() {
     const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    const tbody = document.getElementById('report-table').querySelector('tbody');
+    
+    // Clear existing rows
+    tbody.innerHTML = '';
+
+    // Populate the table with employee data
     employees.forEach(employee => {
-        addEmployeeRow(employee);
+        const newRow = tbody.insertRow();
+        newRow.insertCell(0).textContent = employee.name;
+        newRow.insertCell(1).textContent = employee.email;
+        newRow.insertCell(2).textContent = employee.jobTitle;
+        newRow.insertCell(3).textContent = employee.salary;
+        newRow.insertCell(4).textContent = employee.idNumber;
     });
 }
-
-// Add a new employee row to the table
-function addEmployeeRow(employee) {
-    const newRow = employeeList.insertRow();
-    
-    newRow.insertCell(0).textContent = employee.name;
-    newRow.insertCell(1).textContent = employee.email;
-    newRow.insertCell(2).textContent = employee.jobTitle;
-    newRow.insertCell(3).textContent = employee.salary;
-    newRow.insertCell(4).textContent = employee.idNumber;
-}
-
-// Add event listener for form submission
-form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    // Get input values
-    const name = document.getElementById('employee-name').value;
-    const email = document.getElementById('employee-email').value;
-    const jobTitle = document.getElementById('employee-job').value;
-    const salary = document.getElementById('employee-salary').value;
-    const idNumber = document.getElementById('employee-id-number').value;
-
-    // Create an employee object
-    const employee = { name, email, jobTitle, salary, idNumber };
-
-    // Save employee to localStorage
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
-    employees.push(employee);
-    localStorage.setItem('employees', JSON.stringify(employees));
-
-    // Add the new employee row to the table
-    addEmployeeRow(employee);
-
-    // Clear the form fields
-    form.reset();
-});
 
 // Load employees when the page is loaded
 loadEmployees();

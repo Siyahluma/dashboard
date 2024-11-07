@@ -11,10 +11,10 @@
 <div class="sidebar">
     <img src="logo.png" alt="Logo" class="logo">
     <a href="dashboard.html">Home</a>
-    <a href="employee.html">Add New Employee</a>
-    <a href="removeEmp.html">Remove Employee</a>
+    <a href="removeEmp.html">Manage Employees</a>
     <a href="payroll.html">Process Payroll</a>
-    <a href="index.html" id="logout">Logout</a>
+    <a href="reports.html">View Reports</a>
+    <a href="index.html" id="logout"><b>Logout</b></a>
 </div>
 
 <div class="main">
@@ -26,9 +26,8 @@
     
                 <!-- Example report types -->
                 <div class="report-types">
-                    <button onclick="viewReport('salary')">Salary Report</button>
-                    <button onclick="viewReport('tax')">Tax Report</button>
-                    <button onclick="viewReport('employee')">Employee Report</button>
+                    <a class="links" href="./salary.html">Salary Report</a>
+                    <a class="links" href="./employee.html">Employee Report</a>
                 </div>
     
                 <!-- Placeholder for displaying selected report -->
@@ -45,14 +44,8 @@
     
             </section>
         </div>
-            
-    
-            
-    
-            
+  
         </main>
     </div>
-
-        
 </body>
 </html>
