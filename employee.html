@@ -49,28 +49,8 @@
     </main>
 </div>
 
-<script>
-// Load employees from localStorage and display them in the report table
-function loadEmployees() {
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
-    const tbody = document.getElementById('report-table').querySelector('tbody');
-    
-    // Clear existing rows
-    tbody.innerHTML = '';
+<script src="employee.js">
 
-    // Populate the table with employee data
-    employees.forEach(employee => {
-        const newRow = tbody.insertRow();
-        newRow.insertCell(0).textContent = employee.name;
-        newRow.insertCell(1).textContent = employee.email;
-        newRow.insertCell(2).textContent = employee.jobTitle;
-        newRow.insertCell(3).textContent = employee.salary;
-        newRow.insertCell(4).textContent = employee.idNumber;
-    });
-}
-
-// Load employees when the page is loaded
-loadEmployees();
 </script>
 
 </body>
